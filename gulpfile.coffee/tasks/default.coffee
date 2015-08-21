@@ -1,3 +1,4 @@
-gulp = require 'gulp'
+gulp     = require 'gulp'
+sequence = require 'gulp-sequence'
 
-gulp.task 'default', ['sync']
+gulp.task 'default', sequence('build', 'sync')
