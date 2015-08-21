@@ -1,1 +1,7 @@
-{}
+{
+  "devDependencies": {
+    "coffee-script": "^1.9.3",
+    "gulp": "^3.9.0",
+    "require-dir": "^0.3.0"
+  }
+}
