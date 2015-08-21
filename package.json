@@ -4,6 +4,7 @@
     "coffee-script": "^1.9.3",
     "del": "^1.2.1",
     "gulp": "^3.9.0",
+    "gulp-plumber": "^1.0.1",
     "gulp-sequence": "^0.4.1",
     "gulp-stylus": "^2.0.6",
     "gulp-watch": "^4.3.5",
