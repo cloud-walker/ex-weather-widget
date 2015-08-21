@@ -5,4 +5,5 @@ config = require '../config'
 gulp.task 'watch', [
 	'move:watch'
 	'stylus:watch'
+	'watchify'
 ]
