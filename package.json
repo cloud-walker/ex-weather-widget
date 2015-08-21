@@ -5,8 +5,10 @@
     "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-sequence": "^0.4.1",
+    "gulp-stylus": "^2.0.6",
     "gulp-watch": "^4.3.5",
     "lazypipe": "^1.0.1",
+    "nib": "^1.1.0",
     "require-dir": "^0.3.0"
   }
 }
