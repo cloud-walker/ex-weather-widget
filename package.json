@@ -2,8 +2,11 @@
   "devDependencies": {
     "browser-sync": "^2.8.2",
     "coffee-script": "^1.9.3",
+    "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-sequence": "^0.4.1",
+    "gulp-watch": "^4.3.5",
+    "lazypipe": "^1.0.1",
     "require-dir": "^0.3.0"
   }
 }

@@ -1,3 +1,4 @@
-gulp = require 'gulp'
+gulp     = require 'gulp'
+sequence = require 'gulp-sequence'
 
-gulp.task 'build', []
+gulp.task 'build', sequence('clean', 'move')
