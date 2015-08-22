@@ -5,4 +5,4 @@ config = require '../config'
 gulp.task 'sync', ->
 	sync
 		open  : false
-		server: config.dist
+		server: [config.dist, 'node_modules']
