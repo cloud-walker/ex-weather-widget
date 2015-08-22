@@ -8,7 +8,7 @@
 
 	background-color: $mainColor
 	width           : 390px
-	height          : 465px
+	min-height      : 400px
 	margin          : 0 auto
 	margin-top      : 3rem
 	border-radius   : $border-radius
@@ -16,11 +16,12 @@
 	transition      : transform .3s
 	transform-style : preserve-3d
 	perspective     : 1000
-	font-family: 'Source Sans Pro', sans-serif
+	font-family     : 'Source Sans Pro', sans-serif
+	box-shadow: 0 5px 30px rgba(0, 0, 0, .3)
 
 	@media screen and (max-width: 700px)
-		width : @width - 100
-		height: @height - 70
+		width: @width - 100
+		min-height: @min-height - 70
 
 	&.flipped
 		transform: rotateY(180deg)
