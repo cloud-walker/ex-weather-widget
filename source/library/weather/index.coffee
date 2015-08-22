@@ -33,15 +33,23 @@ class WeatherWidget
 
 	initListeners: ->
 		@target
-			.on 'flip', ->
-				$(@).toggleClass 'flipped'
+			.on 'flip', (e, flip) ->
+				if flip
+					console.log 'flipping to back...'
+					$(@).addClass 'flipped'
+				else
+					console.log 'returning to front'
+					$(@).removeClass 'flipped'
 
 			.on 'position-fetched', (e, pos) =>
 				@loadMap
 					lat: pos.coords.latitude
 					lng: pos.coords.longitude
 
-			.on 'click', '.icon', ->
-				$(@).trigger 'flip'
+			.on 'click', '.front .icon', ->
+				$(@).trigger 'flip', true
+
+			.on 'click', '.back .icon', ->
+				$(@).trigger 'flip', false
 
 module.exports = WeatherWidget
