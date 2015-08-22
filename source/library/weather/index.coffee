@@ -17,9 +17,11 @@ class WeatherWidget
 			latLng  = new google.maps.LatLng(opts.lat, opts.lng)
 
 			map = new google.maps.Map(context,
-				zoom          : 10
-				center        : latLng
-				mapTypeControl: false
+				zoom             : 10
+				center           : latLng
+				mapTypeControl   : false
+				streetViewControl: false
+				zoomControl      : false
 			)
 			marker = new google.maps.Marker(
 				position: latLng
