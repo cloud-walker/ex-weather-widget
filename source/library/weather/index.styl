@@ -1,6 +1,9 @@
 .weather.widget
 	$border-radius = .5rem
+	$padding       = $border-radius * 2
+
 	@require './map'
+	@require './front'
 
 	background-color: hsl(188, 40, 96)
 	width           : 390px
@@ -18,10 +21,10 @@
 
 	.flip.icon
 		position  : absolute
-		top       : 1rem
+		top       : $padding
 		right     : @top
 		cursor    : pointer
-		font-size : 2rem
+		font-size : $padding * 2
 		opacity   : .2
 		z-index   : 2
 		transition: opacity .3s
@@ -39,7 +42,6 @@
 		backface-visibility: hidden
 
 		&.front
-			padding: 1rem
 			z-index: 2
 
 		&.back
