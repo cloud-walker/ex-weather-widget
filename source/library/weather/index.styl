@@ -1,11 +1,12 @@
 .weather.widget
 	$border-radius = .5rem
 	$padding       = $border-radius * 2
+	$mainColor     = hsl(188, 40, 96)
 
 	@require './map'
 	@require './front'
 
-	background-color: hsl(188, 40, 96)
+	background-color: $mainColor
 	width           : 390px
 	height          : 465px
 	margin          : 0 auto
@@ -15,6 +16,7 @@
 	transition      : transform .3s
 	transform-style : preserve-3d
 	perspective     : 1000
+	font-family: 'Source Sans Pro', sans-serif
 
 	@media screen and (max-width: 700px)
 		width : @width - 100
