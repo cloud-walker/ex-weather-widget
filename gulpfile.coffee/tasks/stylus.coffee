@@ -7,19 +7,13 @@ lazypipe = require 'lazypipe'
 sync     = require 'browser-sync'
 config   = require '../config'
 
-src    = "#{config.src}/index.styl"
-stylus = lazypipe()
-	.pipe stylus, use: [nib()]
-	.pipe gulp.dest, config.dist
-	.pipe sync.reload, stream: true
-
 gulp.task 'stylus', ->
-	gulp.src src
+	gulp.src "#{config.src}/index.styl"
 		.pipe plumber()
-		.pipe stylus()
+		.pipe stylus(use: [nib()])
+		.pipe gulp.dest(config.dist)
+		.pipe sync.reload(stream: true)
 
 gulp.task 'stylus:watch', ->
-	gulp.src src
-		.pipe plumber()
-		.pipe watch(src)
-		.pipe stylus()
+	watch "#{config.src}/**/*.styl", ->
+		gulp.start 'stylus'
