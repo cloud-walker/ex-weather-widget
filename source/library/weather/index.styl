@@ -1,0 +1,45 @@
+.weather.widget
+	@require './map'
+
+	background-color: hsl(188, 40, 96)
+	width           : 390px
+	height          : 465px
+	margin          : 0 auto
+	margin-top      : 3rem
+	border-radius   : 1rem
+	position        : relative
+	transition      : transform .3s
+	transform-style : preserve-3d
+	perspective     : 1000
+
+	&.flipped
+		transform: rotateY(180deg)
+
+	.flip.icon
+		position  : absolute
+		top       : 1rem
+		right     : @top
+		cursor    : pointer
+		font-size : 2rem
+		opacity   : .2
+		z-index   : 2
+		transition: opacity .3s
+
+		&:hover
+			opacity: .5
+
+	.face
+		height             : 100%
+		width              : @height
+		box-sizing         : border-box
+		position           : absolute
+		top                : 0
+		left               : @top
+		backface-visibility: hidden
+
+		&.front
+			padding: 1rem
+			z-index: 2
+
+		&.back
+			transform: rotateY(180deg)
