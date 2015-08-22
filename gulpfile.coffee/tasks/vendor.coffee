@@ -10,6 +10,7 @@ gulp.task 'vendor:css', ->
 		'node_modules/normalize.css/normalize.css'
 		'node_modules/open-sans-fontface/open-sans.css'
 		'node_modules/source-sans-pro/source-sans-pro.css'
+		'node_modules/weather-icons/css/weather-icons.css'
 	]
 		.pipe rewrite(destination: 'node_modules')
 		.pipe concat('vendor.css')

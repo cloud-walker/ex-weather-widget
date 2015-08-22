@@ -26,6 +26,7 @@
     "material-design-icons": "^2.0.0",
     "normalize.css": "^3.0.3",
     "open-sans-fontface": "^1.4.0",
-    "source-sans-pro": "^2.0.10"
+    "source-sans-pro": "^2.0.10",
+    "weather-icons": "^1.3.2"
   }
 }

@@ -1,7 +1,59 @@
 .front.face
 	padding-top: $padding * 4
 
+	header
+		padding   : ($padding / 2) 0
+		font-size : 6rem
+		text-align: center
+		color     : hsl(199, 6, 50)
+
+	.content
+		display: flex
+		color  : hsl(200, 4, 57)
+		font-family : 'Open Sans'
+		padding-bottom: $padding
+
+		.temperature
+			padding-left: $padding
+			font-size   : 3rem
+			font-weight : 300
+			line-height : 1
+
+		.info
+			flex-grow: 1
+			padding-left: $padding
+			font-size: 1.1rem
+
+			.mood
+				color: hsl(196, 11, 81)
+
+			.location
+				font-weight: 600
+
+		.date
+			padding         : ($padding / 1.5) 0
+			width           : 66px
+			text-align      : center
+			background-color: hsl(198, 74, 62)
+			color           : white
+			font-weight     : bold
+
 	footer
-		padding         : $padding
-		background-color: hsl(197, 7, 19)
-		color           : $mainColor
+		display                   : flex
+		padding                   : ($padding * 2.95) $padding
+		background-color          : hsl(197, 7, 19)
+		color                     : white
+		border-bottom-left-radius : $border-radius
+		border-bottom-right-radius: $border-radius
+		justify-content           : center
+
+		.item
+			font-weight: bold
+			padding    : 0 $padding
+			align-self : center
+
+			.icon
+			.wi
+				color        : hsl(196, 6, 34)
+				padding-right: ($padding / 2)
+				font-size    : 1.5rem
