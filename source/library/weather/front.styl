@@ -7,10 +7,13 @@
 		text-align: center
 		color     : hsl(199, 6, 50)
 
+		@media screen and (max-width: 700px)
+			font-size: 5rem
+
 	.content
-		display: flex
-		color  : hsl(200, 4, 57)
-		font-family : 'Open Sans'
+		display       : flex
+		color         : hsl(200, 4, 57)
+		font-family   : 'Open Sans'
 		padding-bottom: $padding
 
 		.temperature
@@ -20,9 +23,9 @@
 			line-height : 1
 
 		.info
-			flex-grow: 1
+			flex-grow   : 1
 			padding-left: $padding
-			font-size: 1.1rem
+			font-size   : 1.1rem
 
 			.mood
 				color: hsl(196, 11, 81)
@@ -40,20 +43,27 @@
 
 	footer
 		display                   : flex
-		padding                   : ($padding * 2.95) $padding
+		padding                   : ($padding * 2.99) $padding
 		background-color          : hsl(197, 7, 19)
 		color                     : white
 		border-bottom-left-radius : $border-radius
 		border-bottom-right-radius: $border-radius
 		justify-content           : center
 
+		@media screen and (max-width: 700px)
+			padding: ($padding * 1.15) $padding
+
 		.item
 			font-weight: bold
 			padding    : 0 $padding
 			align-self : center
 
+			@media screen and (max-width: 700px)
+				padding  : 0 ($padding / 2)
+				font-size: .9rem
+
 			.icon
 			.wi
 				color        : hsl(196, 6, 34)
-				padding-right: ($padding / 2)
+				padding-right: ($padding / 3)
 				font-size    : 1.5rem
