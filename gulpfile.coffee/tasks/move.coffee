@@ -4,7 +4,10 @@ lazypipe = require 'lazypipe'
 sync     = require 'browser-sync'
 config   = require '../config'
 
-src  = "#{config.src}/index.html"
+src  = [
+	"#{config.src}/index.html"
+	"#{config.src}/**/*.png"
+]
 move = lazypipe()
 	.pipe gulp.dest, config.dist
 	.pipe sync.reload, stream: true

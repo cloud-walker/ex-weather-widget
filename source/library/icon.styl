@@ -27,3 +27,23 @@
 	-moz-osx-font-smoothing: grayscale
 
 	font-feature-settings: 'liga'
+
+	&.rotating
+		animation: rotating-icon 2s infinite linear
+
+		&.backward
+			animation: backward-rotating-icon 2s infinite linear
+
+@keyframes backward-rotating-icon
+	0%
+		transform: rotate(359deg)
+
+	100%
+		transform: rotate(0deg)
+
+@keyframes rotating-icon
+	0%
+		transform: rotate(0deg)
+
+	100%
+		transform: rotate(359deg)

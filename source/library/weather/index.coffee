@@ -3,6 +3,7 @@ gmaps      = require 'google-maps'
 WeatherApi = require './api'
 tuc        = require 'temp-units-conv'
 moment     = require 'moment'
+wiMap      = require './wi-map'
 
 class WeatherWidget
 	constructor: (context) ->
@@ -30,6 +31,7 @@ class WeatherWidget
 			marker = new google.maps.Marker(
 				position: latLng
 				map     : map
+				icon: 'library/weather/flat-marker.png'
 				title   : 'Your position'
 			)
 
@@ -69,6 +71,14 @@ class WeatherWidget
 		footer
 			.find '.sun .value'
 			.text "#{100 - res.clouds.all}%"
+
+		console.log res.weather[0].id, wiMap[res.weather[0].id]
+
+		target
+			.find 'header i'
+			.removeClass()
+			.addClass wiMap[res.weather[0].id]
+			.text('')
 
 	initListeners: ->
 		$(window).on 'openweathermap-data-found', (e, res) =>
