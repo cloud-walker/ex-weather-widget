@@ -1,19 +1,17 @@
 # ex-weather-widget
 Weather widget exercize
 
-# Requirements
+## Requirements
 Have node.js installed
 Have gulp.js globally installed
 
-# Install
+## Install
 ```
-clone this repo
-cd repo folder
-npm i
-npm i -g gulp # If gulp is not installed..
+npm i // To install dependencies
+npm i -g gulp // If gulp is not installed..
 ```
 
-# Usage
+## Usage
 Just start gulp tasks:
 
 ```
