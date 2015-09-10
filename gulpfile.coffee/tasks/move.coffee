@@ -7,6 +7,7 @@ config   = require '../config'
 src  = [
 	"#{config.src}/index.html"
 	"#{config.src}/**/*.png"
+	'node_modules/@(material-design-icons|weather-icons|source-sans-pro|open-sans-fontface)/**/*.@(woff|eot|ttf|woff2|otf)'
 ]
 move = lazypipe()
 	.pipe gulp.dest, config.dist
