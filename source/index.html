@@ -4,56 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Weather Widget</title>
-	<link rel="stylesheet" href="vendor.css">
-	<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-	<div class="gloss"></div>
-
-	<section class="weather widget">
-		<div class="back face">
-			<i class="flip icon">flip_to_front</i>
-			<div class="map"></div>
-		</div>
-
-		<div class="loading front face">
-			<i class="flip icon">flip_to_back</i>
-			<header>
-				<i class="rotating icon">settings</i>
-			</header>
-
-			<div class="content">
-				<div class="temperature"></div>
-
-				<div class="info">
-					<div class="mood"></div>
-					<div class="location"></div>
-				</div>
-
-				<div class="date">
-					<div class="month"></div>
-					<div class="day"></div>
-				</div>
-			</div>
-
-			<footer>
-				<div class="wind item">
-					<i class="wi wi-windy"></i>
-					<span class="value"></span>
-				</div>
-				<div class="humidity item">
-					<i class="icon">invert_colors</i>
-					<span class="value"></span>
-				</div>
-				<div class="sun item">
-					<i class="icon">wb_sunny</i>
-					<span class="value"></span>
-				</div>
-			</footer>
-		</div>
-	</section>
-
-	<script src="index.js"></script>
+	<div id="root"></div>
+	<script src="bundle.js"></script>
 </body>
 </html>
