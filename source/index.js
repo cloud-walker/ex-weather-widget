@@ -3,4 +3,10 @@ import React from 'react'
 
 import Root from '-/components/Root'
 
-render(<Root />, document.getElementById('root'))
+const doRender = () => render(<Root />, document.getElementById('root'))
+
+doRender()
+
+if (module.hot) {
+  module.hot.accept('-/components/Root', () => doRender())
+}
