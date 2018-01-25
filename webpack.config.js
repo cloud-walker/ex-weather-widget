@@ -9,7 +9,7 @@ module.exports = {
     'webpack/hot/only-dev-server',
     path.resolve(sourcePath, 'index.js'),
   ],
-  resolve: {alias: {'-': sourcePath}},
+  resolve: {alias: {'~': sourcePath}},
   module: {
     rules: [
       {
