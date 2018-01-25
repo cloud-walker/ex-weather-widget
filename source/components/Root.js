@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, {injectGlobal} from 'styled-components'
+import {Toggle} from 'react-powerplug'
 
 injectGlobal`
   body {
@@ -15,14 +16,33 @@ injectGlobal`
   }
 `
 
+// border-radius: 0.5rem;
+// overflow: hidden;
 const WidgetWrapper = styled.main`
-  background: white;
-  border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.3) 0 5px 30px;
-  transform-style: preserve-3d;
-  overflow: hidden;
+  position: relative;
+  width: 30vw;
   perspective: 1000px;
-  width: 400px;
+  transform-style: preserve-3d;
+  transform: ${p => (p.flipped ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+  transition: 0.3s transform;
+
+  & > * {
+    backface-visibility: hidden;
+  }
+`
+
+const WidgetFront = styled.div`
+  background: red;
+  position: relative;
+`
+
+const WidgetBack = styled.div`
+  background: green;
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
 `
 
 const FrontContent = styled.div`
@@ -36,20 +56,24 @@ const FrontFooter = styled.footer`
 class Root extends React.Component {
   render() {
     return (
-      <WidgetWrapper>
-        <FrontContent>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum
-          dolorem aspernatur cum, doloremque commodi sit, accusantium
-          praesentium quisquam neque voluptatem, delectus aut architecto
-          provident distinctio sunt. Blanditiis vitae corporis omnis.
-        </FrontContent>
-        <FrontFooter>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim et
-          laudantium, tenetur temporibus magnam laborum illum odit vero quod
-          quam non eveniet, nemo aliquid pariatur culpa, alias rerum repellendus
-          exercitationem?
-        </FrontFooter>
-      </WidgetWrapper>
+      <Toggle initial={false}>
+        {({on, toggle}) => (
+          <WidgetWrapper onClick={toggle} flipped={on}>
+            <WidgetFront>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
+              fugit voluptas a earum doloremque, expedita praesentium distinctio
+              delectus aspernatur natus nihil, quasi iste, libero quos eaque.
+              Porro corrupti, beatae non.
+            </WidgetFront>
+            <WidgetBack>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Temporibus aliquid nihil voluptates repudiandae nulla, rerum, in
+              maxime reprehenderit. Corporis animi, laboriosam vel ipsum libero!
+              Repudiandae quibusdam delectus voluptatum itaque sed.
+            </WidgetBack>
+          </WidgetWrapper>
+        )}
+      </Toggle>
     )
   }
 }
