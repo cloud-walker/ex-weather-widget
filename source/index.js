@@ -8,5 +8,5 @@ const doRender = () => render(<Root />, document.getElementById('root'))
 doRender()
 
 if (module.hot) {
-  module.hot.accept('-/components/Root', () => doRender())
+  module.hot.accept('~/components/Root', () => doRender())
 }
