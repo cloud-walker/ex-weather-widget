@@ -15,10 +15,18 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        options: {presets: [['env', {modules: false}], 'react']},
+        options: {
+          presets: [['env', {modules: false}], 'react'],
+          plugins: ['transform-class-properties'],
+        },
       },
     ],
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
-  devServer: {hot: true, inline: true, port: 4000, contentBase: sourcePath},
+  devServer: {
+    hot: true,
+    inline: true,
+    port: 4000,
+    contentBase: sourcePath,
+  },
 }
