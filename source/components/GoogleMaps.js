@@ -3,11 +3,35 @@ import querystring from 'querystring'
 import * as R from 'ramda'
 import styled from 'styled-components'
 
-const GOOGLE_MAPS_KEY = 'AIzaSyCBuqtF7l-IOjE8IiSukbLn0IVTCOkxCB4'
-const GOOGLE_MAPS_BASE_URL = 'https://www.google.com/maps/embed/v1/view'
+const BASE_URL = 'https://maps.googleapis.com/maps/api/js'
+const API_KEY = 'AIzaSyA3-604falj3yFcSqyU8b0n7oM8PEBuhGY'
 
-const GoogleMapsIframeWrapper = styled.div`
-  border: 4px solid;
+const mapsPromise = new Promise(resolve => {
+  const script = document.createElement('script')
+  script.async = 1
+  script.defer = 1
+  script.src = `${BASE_URL}?${querystring.stringify({key: API_KEY})}`
+  script.onload = () => resolve(window.google.maps)
+
+  document.head.appendChild(script)
+})
+
+const GoogleMapsTarget = styled.div`
+  height: ${p => p.height};
+  width: 100%;
+
+  & .gmnoprint,
+  & .gm-fullscreen-control {
+    display: none;
+  }
+
+  /**
+   * NOTE: This rule try to remove the Google logo from the map
+   * but its not so accurate as the other stuff..
+   */
+  & .gm-style iframe + div {
+    display: none;
+  }
 `
 
 export class GoogleMaps extends React.Component {
@@ -15,29 +39,23 @@ export class GoogleMaps extends React.Component {
     zoom: 0,
     latitude: 0,
     longitude: 0,
+    height: '400px',
   }
-
-  get url() {
-    return `${GOOGLE_MAPS_BASE_URL}?${querystring.stringify({
-      key: GOOGLE_MAPS_KEY,
-      zoom: this.props.zoom,
-      center: R.pipe(R.pick(['latitude', 'longitude']), R.values, R.join(','))(
-        this.props,
-      ),
-    })}`
-  }
+  target = null
+  componentDidMount = () =>
+    mapsPromise.then(maps => {
+      const center = {lat: this.props.latitude, lng: this.props.longitude}
+      const map = new maps.Map(this.target, {
+        zoom: this.props.zoom,
+        center,
+      })
+      new maps.Marker({position: center, map})
+    })
 
   render = () => (
-    <GoogleMapsIframeWrapper>
-      <iframe
-        src={this.url}
-        width="300"
-        height="300"
-        frameBorder="0"
-        style={{border: 0}}
-        allowFullScreen
-        title="map"
-      />
-    </GoogleMapsIframeWrapper>
+    <GoogleMapsTarget
+      height={this.props.height}
+      innerRef={ref => (this.target = ref)}
+    />
   )
 }

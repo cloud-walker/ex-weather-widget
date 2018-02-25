@@ -40,6 +40,6 @@ const FrontFooter = styled.footer`
 
 export class Root extends React.Component {
   render() {
-    return <GoogleMaps zoom={5} />
+    return <GoogleMaps zoom={5} latitude={0} longitude={0} />
   }
 }
