@@ -49,7 +49,7 @@ export class GoogleMaps extends React.Component {
         zoom: this.props.zoom,
         center,
       })
-      new maps.Marker({position: center, map})
+      new maps.Marker({position: center, map, icon: this.props.marker})
     })
 
   render = () => (

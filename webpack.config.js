@@ -20,6 +20,10 @@ module.exports = {
           plugins: ['transform-class-properties'],
         },
       },
+      {
+        test: /\.png$/,
+        loader: 'file-loader',
+      },
     ],
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],

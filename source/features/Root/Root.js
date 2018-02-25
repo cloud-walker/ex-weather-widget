@@ -2,6 +2,7 @@ import React from 'react'
 import styled, {injectGlobal} from 'styled-components'
 import {Toggle} from 'react-powerplug'
 
+import customMarker from './flat-marker.png'
 import {GoogleMaps} from '~/components/GoogleMaps'
 
 injectGlobal`
@@ -40,6 +41,8 @@ const FrontFooter = styled.footer`
 
 export class Root extends React.Component {
   render() {
-    return <GoogleMaps zoom={5} latitude={0} longitude={0} />
+    return (
+      <GoogleMaps zoom={5} latitude={0} longitude={0} marker={customMarker} />
+    )
   }
 }
