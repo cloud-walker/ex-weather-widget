@@ -39,7 +39,8 @@ export class GoogleMaps extends React.Component {
     zoom: 0,
     latitude: 0,
     longitude: 0,
-    height: '400px',
+    height: '300px',
+    markers: [],
   }
   target = null
   componentDidMount = () =>
@@ -49,7 +50,9 @@ export class GoogleMaps extends React.Component {
         zoom: this.props.zoom,
         center,
       })
-      new maps.Marker({position: center, map, icon: this.props.marker})
+      this.props.markers.forEach(
+        ({position, icon}) => new maps.Marker({position, map, icon}),
+      )
     })
 
   render = () => (

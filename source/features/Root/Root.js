@@ -40,9 +40,14 @@ const FrontFooter = styled.footer`
 `
 
 export class Root extends React.Component {
+  mapCenter = {lat: 0, lng: 0}
   render() {
     return (
-      <GoogleMaps zoom={5} latitude={0} longitude={0} marker={customMarker} />
+      <GoogleMaps
+        zoom={5}
+        center={this.mapCenter}
+        markers={[{position: this.mapCenter, icon: customMarker}]}
+      />
     )
   }
 }
