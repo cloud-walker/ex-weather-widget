@@ -1,21 +1,19 @@
 # ex-weather-widget
+
 Weather widget exercize
 
 ## Requirements
-Have node.js installed
-Have gulp.js globally installed
+
+Have node.js and yarn 1 installed
 
 ## Install
+
 ```
-npm i // To install dependencies
-npm i -g gulp // If gulp is not installed..
+yarn // To install dependencies
 ```
 
 ## Usage
-Just start gulp tasks:
 
 ```
-gulp
+yarn dev
 ```
-
-A browser-sync server will listen to localhost:3000
