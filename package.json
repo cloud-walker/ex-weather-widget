@@ -1,3 +1,9 @@
 {
-  "private": true
+  "scripts": {
+    "dev": "vite"
+  },
+  "private": true,
+  "devDependencies": {
+    "vite": "^3.1.8"
+  }
 }
