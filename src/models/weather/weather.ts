@@ -2,7 +2,7 @@ import {envVars} from '../../envVars'
 
 export type ResponseGetWeather = {
   base: string
-  clouds: Record<string, number>
+  clouds: {all: number}
   rain?: Record<string, number>
   cod: number
   dt: number
