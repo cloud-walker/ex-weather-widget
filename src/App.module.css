@@ -1,0 +1,7 @@
+.widget {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}

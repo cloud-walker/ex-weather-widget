@@ -11,6 +11,8 @@ html, body, #root {
 }
 
 :root {
+  --radius: 0.5rem;
+
   background-color: #4E585F;
 }
 
