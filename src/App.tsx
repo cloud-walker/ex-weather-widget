@@ -73,6 +73,9 @@ function Front({position}: {position?: GeolocationPosition}) {
   )
 }
 
+/**
+ * @link https://developers.google.com/maps/documentation/embed/embedding-map
+ */
 function Back({position}: {position?: GeolocationPosition}) {
   const url = new URL('https://www.google.com/maps/embed/v1/view')
   url.searchParams.set('key', envVars.VITE_GMAPS_APIKEY)
