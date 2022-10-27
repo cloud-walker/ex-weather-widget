@@ -1,6 +1,8 @@
 import {useQuery} from '@tanstack/react-query'
 import {useEffect, useState} from 'react'
+
 import classes from './App.module.css'
+import {envVars} from './envVars'
 import {getWeather} from './models/weather/weather'
 
 export function App() {
@@ -18,7 +20,11 @@ export function App() {
         setSide(side == 'front' ? 'back' : 'front')
       }}
     >
-      {side == 'front' ? <Front position={position} /> : <Back />}
+      {side == 'front' ? (
+        <Front position={position} />
+      ) : (
+        <Back position={position} />
+      )}
     </div>
   )
 }
@@ -67,6 +73,29 @@ function Front({position}: {position?: GeolocationPosition}) {
   )
 }
 
-function Back() {
-  return <div style={{backgroundColor: 'white'}}>back</div>
+function Back({position}: {position?: GeolocationPosition}) {
+  const url = new URL('https://www.google.com/maps/embed/v1/view')
+  url.searchParams.set('key', envVars.VITE_GMAPS_APIKEY)
+  url.searchParams.set('zoom', '10')
+  url.searchParams.set(
+    'center',
+    position
+      ? `${position.coords.latitude},${position.coords.longitude}`
+      : '0,0',
+  )
+  url.searchParams.sort()
+
+  return (
+    <div style={{backgroundColor: 'white'}}>
+      <iframe
+        width="600"
+        height="450"
+        style={{border: 0}}
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        src={url.toString()}
+      />
+    </div>
+  )
 }
