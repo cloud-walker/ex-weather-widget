@@ -10,9 +10,16 @@ html, body, #root {
   height: 100%;
 }
 
+iframe {
+  display: block;
+}
+
 :root {
   --radius: 0.5rem;
 
   background-color: #4E585F;
 }
 
+.gm-style .default-card {
+  display: none;
+}

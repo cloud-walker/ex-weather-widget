@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query'
-import {useEffect, useState} from 'react'
+import {HTMLAttributes, useEffect, useState} from 'react'
 
 import classes from './App.module.css'
 import {envVars} from './envVars'
@@ -8,28 +8,38 @@ import {getWeather} from './models/weather/weather'
 export function App() {
   const [side, setSide] = useState<'front' | 'back'>('front')
   const [position, setPosition] = useState<GeolocationPosition>()
+  const handleFlip = () => {
+    setSide(side == 'front' ? 'back' : 'front')
+  }
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
       setPosition(pos)
     })
   }, [])
   return (
-    <div
-      className={classes.widget}
-      onClick={() => {
-        setSide(side == 'front' ? 'back' : 'front')
-      }}
-    >
-      {side == 'front' ? (
-        <Front position={position} />
-      ) : (
-        <Back position={position} />
-      )}
+    <div className={classes.layout}>
+      <div
+        className={classes.widget}
+        style={{
+          transform: side == 'front' ? undefined : 'rotateY(180deg)',
+        }}
+      >
+        <Front position={position} onFlip={handleFlip} />
+        <Back position={position} onFlip={handleFlip} />
+      </div>
     </div>
   )
 }
 
-function Front({position}: {position?: GeolocationPosition}) {
+function Front({
+  position,
+  style,
+  onFlip,
+  ...props
+}: HTMLAttributes<HTMLElement> & {
+  position?: GeolocationPosition
+  onFlip: () => void
+}) {
   const params = position && {
     longitude: position.coords.longitude,
     latitude: position.coords.latitude,
@@ -45,7 +55,8 @@ function Front({position}: {position?: GeolocationPosition}) {
     enabled: params != null,
   })
   return (
-    <section style={{backgroundColor: 'white'}}>
+    <section {...props} style={{...style, backgroundColor: 'white'}}>
+      <button onClick={onFlip}>flip</button>
       <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
       <div>
         {query.isSuccess ? (
@@ -76,7 +87,15 @@ function Front({position}: {position?: GeolocationPosition}) {
 /**
  * @link https://developers.google.com/maps/documentation/embed/embedding-map
  */
-function Back({position}: {position?: GeolocationPosition}) {
+function Back({
+  position,
+  style,
+  onFlip,
+  ...props
+}: HTMLAttributes<HTMLElement> & {
+  position?: GeolocationPosition
+  onFlip: () => void
+}) {
   const url = new URL('https://www.google.com/maps/embed/v1/view')
   url.searchParams.set('key', envVars.VITE_GMAPS_APIKEY)
   url.searchParams.set('zoom', '10')
@@ -89,10 +108,17 @@ function Back({position}: {position?: GeolocationPosition}) {
   url.searchParams.sort()
 
   return (
-    <div style={{backgroundColor: 'white'}}>
+    <div {...props} style={{...style, backgroundColor: 'white'}}>
+      <button
+        onClick={onFlip}
+        style={{position: 'absolute', top: '0.5em', right: '0.5em'}}
+      >
+        flip
+      </button>
+
       <iframe
-        width="600"
-        height="450"
+        width="100%"
+        height="100%"
         style={{border: 0}}
         loading="lazy"
         allowFullScreen

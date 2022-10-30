@@ -1,7 +1,44 @@
-.widget {
-  display: flex;
+.layout {
   height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius);
 }
+
+.widget {
+  border-radius: var(--radius);
+  display: grid;
+  grid-auto-rows: 1fr;
+  max-width: 300px;
+
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+  perspective: 1000px;
+}
+
+.widget > * {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  backface-visibility: hidden;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.widget > :first-child {
+  z-index: 1;
+}
+
+.widget > :last-child {
+  transform: rotateY(180deg);
+  position: relative;
+}
+
+a[href^="http://maps.google.com/maps"],
+a[href^="https://maps.google.com/maps"]{
+	display: none !important;}
+
+.default-card {
+	display: none}
+
+.gmnoprint div{
+	background: none !important}
