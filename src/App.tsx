@@ -1,5 +1,7 @@
 import {useQuery} from '@tanstack/react-query'
+import {clsx} from 'clsx'
 import {HTMLAttributes, useEffect, useState} from 'react'
+import {MdFlipToBack, MdFlipToFront} from 'react-icons/md'
 
 import classes from './App.module.css'
 import {envVars} from './envVars'
@@ -18,23 +20,18 @@ export function App() {
   }, [])
   return (
     <div className={classes.layout}>
-      <div
-        className={classes.widget}
-        style={{
-          transform: side == 'front' ? undefined : 'rotateY(180deg)',
-        }}
-      >
-        <Front position={position} onFlip={handleFlip} />
-        <Back position={position} onFlip={handleFlip} />
+      <div className={classes.widget} data-side={side}>
+        <Info position={position} onFlip={handleFlip} />
+        <Map position={position} onFlip={handleFlip} />
       </div>
     </div>
   )
 }
 
-function Front({
+function Info({
   position,
-  style,
   onFlip,
+  className,
   ...props
 }: HTMLAttributes<HTMLElement> & {
   position?: GeolocationPosition
@@ -55,8 +52,10 @@ function Front({
     enabled: params != null,
   })
   return (
-    <section {...props} style={{...style, backgroundColor: 'white'}}>
-      <button onClick={onFlip}>flip</button>
+    <section {...props} className={clsx(className, classes.info)}>
+      <button onClick={onFlip}>
+        <MdFlipToBack />
+      </button>
       <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
       <div>
         {query.isSuccess ? (
@@ -87,10 +86,10 @@ function Front({
 /**
  * @link https://developers.google.com/maps/documentation/embed/embedding-map
  */
-function Back({
+function Map({
   position,
-  style,
   onFlip,
+  className,
   ...props
 }: HTMLAttributes<HTMLElement> & {
   position?: GeolocationPosition
@@ -108,14 +107,7 @@ function Back({
   url.searchParams.sort()
 
   return (
-    <div {...props} style={{...style, backgroundColor: 'white'}}>
-      <button
-        onClick={onFlip}
-        style={{position: 'absolute', top: '0.5em', right: '0.5em'}}
-      >
-        flip
-      </button>
-
+    <div {...props} className={clsx(className, classes.map)}>
       <iframe
         width="100%"
         height="100%"
@@ -125,6 +117,9 @@ function Back({
         referrerPolicy="no-referrer-when-downgrade"
         src={url.toString()}
       />
+      <button onClick={onFlip}>
+        <MdFlipToFront />
+      </button>
     </div>
   )
 }

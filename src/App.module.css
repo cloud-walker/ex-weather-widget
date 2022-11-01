@@ -9,13 +9,12 @@
   border-radius: var(--radius);
   display: grid;
   grid-auto-rows: 1fr;
-  max-width: 300px;
+  width: 300px;
 
   transform-style: preserve-3d;
-  transition: transform 0.3s;
   perspective: 1000px;
+  transition: transform 0.3s;
 }
-
 .widget > * {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
@@ -23,22 +22,36 @@
   border-radius: 0.25em;
   overflow: hidden;
 }
-
 .widget > :first-child {
   z-index: 1;
 }
-
 .widget > :last-child {
   transform: rotateY(180deg);
-  position: relative;
+}
+.widget[data-side="back"] {
+  transform: rotateY(180deg);
 }
 
-a[href^="http://maps.google.com/maps"],
-a[href^="https://maps.google.com/maps"]{
-	display: none !important;}
+.map {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  position: relative;
+  padding: 0.5em;
+}
+.map button {
+  position: relative;
+}
+.map iframe {
+  position: absolute;
+  inset: 0;
+}
 
-.default-card {
-	display: none}
-
-.gmnoprint div{
-	background: none !important}
+.info {
+  display: grid;
+  padding: 0.5em;
+  background-color: white;
+}
+.info button {
+  justify-self: end;
+}
