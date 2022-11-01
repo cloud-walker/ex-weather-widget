@@ -15,11 +15,15 @@ iframe {
 }
 
 :root {
+  --space-xs: 0.25em;
+  --space-sm: 0.5em;
+  --space-md: 1em;
+  
   --radius: 0.5rem;
 
   background-color: #4E585F;
 }
 
-.gm-style .default-card {
-  display: none;
+.flex-grow {
+  flex-grow: 1;
 }

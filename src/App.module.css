@@ -6,11 +6,10 @@
 }
 
 .widget {
-  border-radius: var(--radius);
   display: grid;
   grid-auto-rows: 1fr;
-  width: 300px;
-
+  width: 400px;
+  
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: transform 0.3s;
@@ -19,7 +18,7 @@
   grid-row: 1 / -1;
   grid-column: 1 / -1;
   backface-visibility: hidden;
-  border-radius: 0.25em;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 .widget > :first-child {
@@ -37,7 +36,8 @@
   align-items: flex-start;
   justify-content: flex-end;
   position: relative;
-  padding: 0.5em;
+  padding: var(--space-md);
+  min-height: 400px;
 }
 .map button {
   position: relative;
@@ -48,10 +48,31 @@
 }
 
 .info {
-  display: grid;
-  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
   background-color: white;
 }
 .info button {
-  justify-self: end;
+  align-self: flex-end;
+}
+.info .meteo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info .meteo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.info .details {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-evenly;
+}
+.info .details > * {
+  display: flex;
+  gap: var(--space-xs);
 }

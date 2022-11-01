@@ -2,11 +2,20 @@ import {useQuery} from '@tanstack/react-query'
 import {clsx} from 'clsx'
 import {HTMLAttributes, useEffect, useState} from 'react'
 import {MdFlipToBack, MdFlipToFront} from 'react-icons/md'
+import {WiCloudy, WiHumidity, WiWindy} from 'react-icons/wi'
 
 import classes from './App.module.css'
 import {envVars} from './envVars'
 import {getWeather} from './models/weather/weather'
 
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  month: 'short',
+  day: 'numeric',
+})
+
+/**
+ * Flip card technique taken from {@link https://www.w3schools.com/howto/howto_css_flip_card.asp w3schools}
+ */
 export function App() {
   const [side, setSide] = useState<'front' | 'back'>('front')
   const [position, setPosition] = useState<GeolocationPosition>()
@@ -56,25 +65,39 @@ function Info({
       <button onClick={onFlip}>
         <MdFlipToBack />
       </button>
-      <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
+      <div className={clsx(classes['meteo-icon'], 'flex-grow')}>
+        <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
+      </div>
       <div>
         {query.isSuccess ? (
-          <>
+          <div className={classes.meteo}>
             <div>{query.data?.main.temp}</div>
-            <div>{query.data?.weather[0].description}</div>
-            <div>{`${query.data?.name}, ${query.data?.sys.country}`}</div>
-          </>
+            <div className="flex-grow">
+              <div>{query.data?.weather[0].description}</div>
+              <div>{`${query.data?.name}, ${query.data?.sys.country}`}</div>
+            </div>
+            <div>{dateFormatter.format(new Date())}</div>
+          </div>
         ) : (
           'Loading...'
         )}
       </div>
-      <div style={{display: 'flex', gap: '0.5em'}}>
+      <div>
         {query.isSuccess ? (
-          <>
-            <div>{query.data?.wind.speed}</div>
-            <div>{query.data?.main.humidity}</div>
-            <div>{query.data?.clouds.all}</div>
-          </>
+          <div className={classes.details}>
+            <div>
+              <WiWindy />
+              {query.data?.wind.speed}
+            </div>
+            <div>
+              <WiHumidity />
+              {query.data?.main.humidity}
+            </div>
+            <div>
+              <WiCloudy />
+              {query.data?.clouds.all}
+            </div>
+          </div>
         ) : (
           <>Loading...</>
         )}
