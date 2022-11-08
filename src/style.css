@@ -1,29 +1,16 @@
-* {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind utilities;
 
-body {
-  margin: 0;
-}
-
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
-}
-
-iframe {
-  display: block;
 }
 
 :root {
   --space-xs: 0.25em;
   --space-sm: 0.5em;
   --space-md: 1em;
-  
+
   --radius: 0.5rem;
-
-  background-color: #4E585F;
-}
-
-.flex-grow {
-  flex-grow: 1;
 }

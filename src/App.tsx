@@ -23,15 +23,33 @@ export function App() {
     setSide(side == 'front' ? 'back' : 'front')
   }
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
+    navigator.geolocation.getCurrentPosition(pos => {
       setPosition(pos)
     })
   }, [])
   return (
-    <div className={classes.layout}>
-      <div className={classes.widget} data-side={side}>
-        <Info position={position} onFlip={handleFlip} />
-        <Map position={position} onFlip={handleFlip} />
+    <div className="h-full flex items-center justify-center">
+      <div
+        className="grid auto-rows-fr w-[400px] transition-all data-[side=back]:rotate-180"
+        style={{transformStyle: 'preserve-3d', perspective: '1000px'}}
+        data-side={side}
+      >
+        <Info
+          position={position}
+          onFlip={handleFlip}
+          className="rounded"
+          style={{gridRow: '1 / -1', backfaceVisibility: 'hidden', zIndex: 1}}
+        />
+        <Map
+          position={position}
+          onFlip={handleFlip}
+          className="rounded"
+          style={{
+            gridRow: '1 / -1',
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
+          }}
+        />
       </div>
     </div>
   )

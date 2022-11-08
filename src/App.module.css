@@ -1,15 +1,8 @@
-.layout {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .widget {
   display: grid;
   grid-auto-rows: 1fr;
   width: 400px;
-  
+
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: transform 0.3s;
@@ -27,7 +20,7 @@
 .widget > :last-child {
   transform: rotateY(180deg);
 }
-.widget[data-side="back"] {
+.widget[data-side='back'] {
   transform: rotateY(180deg);
 }
 
