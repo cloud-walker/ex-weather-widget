@@ -1,16 +1,2 @@
 @tailwind base;
 @tailwind utilities;
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
-:root {
-  --space-xs: 0.25em;
-  --space-sm: 0.5em;
-  --space-md: 1em;
-
-  --radius: 0.5rem;
-}
