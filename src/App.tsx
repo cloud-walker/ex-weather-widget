@@ -41,12 +41,12 @@ export function App() {
         <Info
           position={position}
           onFlip={handleFlip}
-          className="row-[1/-1] col-[1/-1] rounded [backface-visibility:hidden] z-10"
+          className="row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden] z-10"
         />
         <Map
           position={position}
           onFlip={handleFlip}
-          className="row-[1/-1] col-[1/-1] rounded [backface-visibility:hidden] [transform:rotateY(180deg)]"
+          className="row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
         />
       </div>
     </div>
@@ -79,41 +79,53 @@ function Info({
   return (
     <section
       {...props}
-      className={clsx(className, 'flex flex-col gap-2', 'p-4', 'bg-white')}
+      className={clsx(className, 'flex flex-col gap-4', 'bg-white')}
     >
-      <button onClick={onFlip} className="self-end">
+      <button onClick={onFlip} className="self-end px-4 py-4 text-3xl">
         <MdFlipToBack />
       </button>
-      <div className={clsx('flex-grow', 'flex items-center justify-center')}>
+      <div
+        className={clsx(
+          'flex-grow',
+          'flex items-center justify-center',
+          'text-7xl text-gray-500',
+        )}
+      >
         <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
       </div>
-      <div>
+      <div className="pl-4">
         {query.isSuccess ? (
-          <div className="flex items-center gap-2">
-            <div>{query.data?.main.temp}</div>
-            <div className="flex-grow">
-              <div>{query.data?.weather[0].description}</div>
-              <div>{`${query.data?.name}, ${query.data?.sys.country}`}</div>
+          <div className="flex items-center gap-4">
+            <div className="text-gray-600 text-4xl font-light">
+              {query.data?.main.temp}
             </div>
-            <div>{dateFormatter.format(new Date())}</div>
+            <div className="flex-grow font-semibold text-xl">
+              <div className="text-gray-500">
+                {query.data?.weather[0].description}
+              </div>
+              <div className="text-gray-600">{`${query.data?.name}, ${query.data?.sys.country}`}</div>
+            </div>
+            <div className="bg-blue-400 text-white font-bold py-4 px-3">
+              {dateFormatter.format(new Date())}
+            </div>
           </div>
         ) : (
           'Loading...'
         )}
       </div>
-      <div>
+      <div className="bg-gray-800 text-white font-semibold px-4 py-10">
         {query.isSuccess ? (
           <div className="flex gap-2 justify-evenly">
-            <div className="flex gap-1">
-              <WiWindy />
+            <div className="flex items-center gap-1">
+              <WiWindy className="text-gray-400" />
               {query.data?.wind.speed}
             </div>
-            <div className="flex gap-1">
-              <WiHumidity />
+            <div className="flex items-center gap-1">
+              <WiHumidity className="text-gray-400" />
               {query.data?.main.humidity}
             </div>
-            <div className="flex gap-1">
-              <WiCloudy />
+            <div className="flex items-center gap-1">
+              <WiCloudy className="text-gray-400" />
               {query.data?.clouds.all}
             </div>
           </div>
@@ -169,7 +181,7 @@ function Map({
         src={url.toString()}
         className="absolute inset-0"
       />
-      <button onClick={onFlip} className="relative">
+      <button onClick={onFlip} className="relative text-3xl">
         <MdFlipToFront />
       </button>
     </div>
