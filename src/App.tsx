@@ -1,6 +1,12 @@
 import {useQuery} from '@tanstack/react-query'
 import {clsx} from 'clsx'
-import {HTMLAttributes, useEffect, useState} from 'react'
+import {
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react'
 import {MdFlipToBack, MdFlipToFront} from 'react-icons/md'
 import {WiCloudy, WiHumidity, WiWindy} from 'react-icons/wi'
 
@@ -12,6 +18,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
 })
 
+const sideStyle =
+  'row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden]'
+
 /**
  * Flip card technique taken from {@link https://www.w3schools.com/howto/howto_css_flip_card.asp w3schools}
  */
@@ -22,7 +31,7 @@ export function App() {
     setSide(side == 'front' ? 'back' : 'front')
   }
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
+    navigator.geolocation.getCurrentPosition(pos => {
       setPosition(pos)
     })
   }, [])
@@ -41,12 +50,12 @@ export function App() {
         <Info
           position={position}
           onFlip={handleFlip}
-          className="row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden] z-10"
+          className={clsx(sideStyle, 'z-10')}
         />
         <Map
           position={position}
           onFlip={handleFlip}
-          className="row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
+          className={clsx(sideStyle, '[transform:rotateY(180deg)]')}
         />
       </div>
     </div>
@@ -81,9 +90,11 @@ function Info({
       {...props}
       className={clsx(className, 'flex flex-col gap-4', 'bg-white')}
     >
-      <button onClick={onFlip} className="self-end px-4 py-4 text-3xl">
-        <MdFlipToBack />
-      </button>
+      <div className="self-end px-4 py-4">
+        <ButtonFlip onClick={onFlip}>
+          <MdFlipToBack />
+        </ButtonFlip>
+      </div>
       <div
         className={clsx(
           'flex-grow',
@@ -110,30 +121,39 @@ function Info({
             </div>
           </div>
         ) : (
-          'Loading...'
+          <div className="text-center">Loading...</div>
         )}
       </div>
       <div className="bg-gray-800 text-white font-semibold px-4 py-10">
         {query.isSuccess ? (
           <div className="flex gap-2 justify-evenly">
-            <div className="flex items-center gap-1">
-              <WiWindy className="text-gray-400" />
+            <InfoFooterItem icon={<WiWindy />}>
               {query.data?.wind.speed}
-            </div>
-            <div className="flex items-center gap-1">
-              <WiHumidity className="text-gray-400" />
+            </InfoFooterItem>
+            <InfoFooterItem icon={<WiHumidity />}>
               {query.data?.main.humidity}
-            </div>
-            <div className="flex items-center gap-1">
-              <WiCloudy className="text-gray-400" />
+            </InfoFooterItem>
+            <InfoFooterItem icon={<WiCloudy />}>
               {query.data?.clouds.all}
-            </div>
+            </InfoFooterItem>
           </div>
         ) : (
-          <>Loading...</>
+          <div className="text-center">Loading...</div>
         )}
       </div>
     </section>
+  )
+}
+
+function InfoFooterItem({
+  children,
+  icon,
+}: PropsWithChildren<{icon: ReactNode}>) {
+  return (
+    <div className="flex items-center gap-1">
+      <div className="text-gray-400 text-3xl">{icon}</div>
+      {children}
+    </div>
   )
 }
 
@@ -181,9 +201,21 @@ function Map({
         src={url.toString()}
         className="absolute inset-0"
       />
-      <button onClick={onFlip} className="relative text-3xl">
+      <ButtonFlip onClick={onFlip} className="relative">
         <MdFlipToFront />
-      </button>
+      </ButtonFlip>
     </div>
+  )
+}
+
+function ButtonFlip({className, ...props}: HTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      className={clsx(
+        className,
+        'text-3xl p-1 bg-gray-700 hover:bg-gray-800 text-white rounded-md',
+      )}
+      {...props}
+    />
   )
 }
