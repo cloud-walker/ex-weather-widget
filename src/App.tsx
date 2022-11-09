@@ -1,6 +1,7 @@
 import {useQuery} from '@tanstack/react-query'
 import {clsx} from 'clsx'
 import {
+  createElement,
   HTMLAttributes,
   PropsWithChildren,
   ReactNode,
@@ -12,10 +13,15 @@ import {WiCloudy, WiHumidity, WiWindy} from 'react-icons/wi'
 
 import {envVars} from './envVars'
 import {getWeather} from './models/weather/weather'
+import {weatherId2Icon} from './models/weather/weatherId2Icon'
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   month: 'short',
   day: 'numeric',
+})
+const celsiusFormatter = new Intl.NumberFormat('en-GB', {
+  style: 'unit',
+  unit: 'celsius',
 })
 
 const sideStyle =
@@ -85,6 +91,8 @@ function Info({
     },
     enabled: params != null,
   })
+  const data = query.data
+  const weather = data?.weather[0]
   return (
     <section
       {...props}
@@ -95,28 +103,28 @@ function Info({
           <MdFlipToBack />
         </ButtonFlip>
       </div>
-      <div
-        className={clsx(
-          'flex-grow',
-          'flex items-center justify-center',
-          'text-7xl text-gray-500',
-        )}
-      >
-        <div>{query.isSuccess ? query.data?.weather[0].id : 'Loading...'}</div>
+      <div className={clsx('flex-grow', 'flex items-center justify-center')}>
+        <div className="text-7xl text-gray-500">
+          {weather != null
+            ? createElement(weatherId2Icon[weather.id], {
+                style: {fontSize: '2em'},
+              })
+            : 'Loading...'}
+        </div>
       </div>
       <div className="pl-4">
         {query.isSuccess ? (
           <div className="flex items-center gap-4">
-            <div className="text-gray-600 text-4xl font-light">
-              {query.data?.main.temp}
+            <div className="text-gray-600 text-3xl font-semibold">
+              {data && celsiusFormatter.format(Math.ceil(data.main.temp))}
             </div>
-            <div className="flex-grow font-semibold text-xl">
-              <div className="text-gray-500">
-                {query.data?.weather[0].description}
+            <div className="flex-grow font-medium text-xl">
+              <div className="text-gray-500 capitalize">
+                {weather?.description}
               </div>
-              <div className="text-gray-600">{`${query.data?.name}, ${query.data?.sys.country}`}</div>
+              <div className="text-gray-600">{`${data?.name}, ${data?.sys.country}`}</div>
             </div>
-            <div className="bg-blue-400 text-white font-bold py-4 px-3">
+            <div className="bg-blue-400 text-white text-lg font-medium py-4 px-3">
               {dateFormatter.format(new Date())}
             </div>
           </div>
@@ -128,13 +136,13 @@ function Info({
         {query.isSuccess ? (
           <div className="flex gap-2 justify-evenly">
             <InfoFooterItem icon={<WiWindy />}>
-              {query.data?.wind.speed}
+              {data?.wind.speed}
             </InfoFooterItem>
             <InfoFooterItem icon={<WiHumidity />}>
-              {query.data?.main.humidity}
+              {data?.main.humidity}
             </InfoFooterItem>
             <InfoFooterItem icon={<WiCloudy />}>
-              {query.data?.clouds.all}
+              {data?.clouds.all}
             </InfoFooterItem>
           </div>
         ) : (

@@ -37,6 +37,7 @@ export async function getWeather(params: {
   const url = new URL('https://api.openweathermap.org/data/2.5/weather')
   url.searchParams.set('lat', params.latitude.toString())
   url.searchParams.set('lon', params.longitude.toString())
+  url.searchParams.set('units', 'metric')
   url.searchParams.set('appid', envVars.VITE_OPENWEATHER_APIKEY)
   const res = await fetch(url.toString())
   if (!res.ok) {
