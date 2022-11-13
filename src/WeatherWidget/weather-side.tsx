@@ -8,6 +8,7 @@ import {
 } from 'react'
 import {MdFlipToBack} from 'react-icons/md'
 import {WiCloudy, WiHumidity, WiWindy} from 'react-icons/wi'
+
 import {getWeather} from '../models/weather/weather'
 import {weatherId2Icon} from '../models/weather/weatherId2Icon'
 import {ButtonFlip} from './primitives'

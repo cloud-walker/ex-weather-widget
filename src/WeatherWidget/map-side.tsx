@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import {HTMLAttributes} from 'react'
 import {MdFlipToFront} from 'react-icons/md'
+
 import {envVars} from '../envVars'
 import {ButtonFlip} from './primitives'
 
@@ -16,17 +17,8 @@ export function MapSide({
   position?: GeolocationPosition
   onFlip?: () => void
 }) {
-  const url = new URL('https://www.google.com/maps/embed/v1/view')
-  url.searchParams.set('key', envVars.VITE_GMAPS_APIKEY)
-  url.searchParams.set('zoom', '10')
-  url.searchParams.set(
-    'center',
-    position
-      ? `${position.coords.latitude},${position.coords.longitude}`
-      : '0,0',
-  )
-  url.searchParams.sort()
-  console.log(url.toString())
+  const url = makeMapsIframeUrl(position)
+
   return (
     <div
       className={clsx(
@@ -39,13 +31,14 @@ export function MapSide({
       {...props}
     >
       <iframe
+        key={url}
         width="100%"
         height="100%"
         style={{border: 0}}
         loading="lazy"
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
-        src={url.toString()}
+        src={url}
         className="absolute inset-0"
       />
       <ButtonFlip onClick={onFlip} className="relative">
@@ -53,4 +46,16 @@ export function MapSide({
       </ButtonFlip>
     </div>
   )
+}
+
+function makeMapsIframeUrl(position?: GeolocationPosition): string {
+  const url = new URL('https://www.google.com/maps/embed/v1/view')
+  url.searchParams.set('key', envVars.VITE_GMAPS_APIKEY)
+  url.searchParams.set('zoom', '10')
+  url.searchParams.set(
+    'center',
+    `${position?.coords.latitude ?? 0},${position?.coords.longitude ?? 0}`,
+  )
+  url.searchParams.sort()
+  return url.toString()
 }
