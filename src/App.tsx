@@ -37,7 +37,7 @@ export function App() {
     setSide(side == 'front' ? 'back' : 'front')
   }
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(pos => {
+    navigator.geolocation.getCurrentPosition((pos) => {
       setPosition(pos)
     })
   }, [])
@@ -47,7 +47,8 @@ export function App() {
         className={clsx(
           'grid auto-rows-fr',
           'w-[400px]',
-          'transition-all',
+          'transition duration-300',
+          'shadow-lg',
           'data-[side=back]:[transform:rotateY(180deg)]',
           '[transform-style:preserve-3d] [perspective:1000px]',
         )}
