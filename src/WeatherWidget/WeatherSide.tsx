@@ -167,7 +167,7 @@ export function WeatherSide({
 						className={css({
 							display: 'flex',
 							gap: '2',
-							justifyContent: 'evenly',
+							justifyContent: 'space-evenly',
 						})}
 					>
 						<WeatherFooterItem icon={<WiWindy />}>

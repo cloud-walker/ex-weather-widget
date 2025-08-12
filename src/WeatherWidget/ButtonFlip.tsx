@@ -7,6 +7,7 @@ export function ButtonFlip({
 }: HTMLStyledProps<'button'>) {
 	return (
 		<button
+			type="button"
 			{...props}
 			className={cx(
 				props.className,
