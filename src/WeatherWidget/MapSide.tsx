@@ -1,6 +1,6 @@
 import type {HTMLAttributes} from 'react'
 import {MdFlipToFront} from 'react-icons/md'
-import {cx} from '#/panda/css'
+import {css, cx} from '#/panda/css'
 import {styled} from '#/panda/jsx'
 import {envVars} from '../envVars'
 import {ButtonFlip} from './ButtonFlip'
@@ -23,10 +23,14 @@ export function MapSide({
 		<div
 			className={cx(
 				className,
-				'relative',
-				'flex items-start justify-end',
-				'p-4',
-				'min-h-[400px]',
+				css({
+					position: 'relative',
+					display: 'flex',
+					alignItems: 'start',
+					justifyContent: 'end',
+					padding: '4',
+					minHeight: '[400px]',
+				}),
 			)}
 			{...props}
 		>
