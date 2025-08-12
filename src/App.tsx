@@ -1,9 +1,18 @@
+import {styled} from '#/jsx'
+
 import {WeatherWidget} from './WeatherWidget/WeatherWidget'
 
 export function App() {
 	return (
-		<div className="h-full flex items-center justify-center">
+		<styled.div
+			css={{
+				height: 'svh',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
 			<WeatherWidget />
-		</div>
+		</styled.div>
 	)
 }

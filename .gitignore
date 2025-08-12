@@ -1,3 +1,6 @@
 /node_modules
 /dist
 /*.local
+## Panda
+styled-system
+styled-system-studio
