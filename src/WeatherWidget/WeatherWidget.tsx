@@ -1,13 +1,17 @@
-import {clsx} from 'clsx'
 import {useEffect, useState} from 'react'
-
-import {MapSide} from './map-side'
-import {WeatherSide} from './weather-side'
+import {css} from '#/panda/css'
+import {MapSide} from './MapSide'
+import {WeatherSide} from './WeatherSide'
 
 type WidgetSide = 'front' | 'back'
 
-const commonSideStyle =
-	'row-[1/-1] col-[1/-1] rounded-lg overflow-hidden [backface-visibility:hidden]'
+const commonSideStyle = css.raw({
+	overflow: 'hidden',
+	borderRadius: 'lg',
+	backfaceVisibility: 'hidden',
+	gridRow: '[1/-1]',
+	gridColumn: '[1/-1]',
+})
 
 export function WeatherWidget() {
 	const [position, setPosition] = useState<GeolocationPosition>()
@@ -24,25 +28,40 @@ export function WeatherWidget() {
 
 	return (
 		<div
-			className={clsx(
-				'grid auto-rows-fr',
-				'w-[400px]',
-				'transition duration-300',
-				'shadow-lg',
-				'data-[side=back]:[transform:rotateY(180deg)]',
-				'[transform-style:preserve-3d] [perspective:1000px]',
-			)}
+			className={css({
+				display: 'grid',
+				gridAutoRows: 'fr',
+				width: '[400px]',
+				boxShadow: 'lg',
+				transition: 'all',
+				transitionDuration: '[300ms]',
+				transformStyle: 'preserve-3d',
+				perspective: '[1000px]',
+				'&[data-side="back"]': {
+					transform: 'rotateY(180deg)',
+				},
+			})}
 			data-side={side}
 		>
 			<WeatherSide
 				position={position}
 				onFlip={handleFlip}
-				className={clsx(commonSideStyle, 'z-10')}
+				css={[
+					commonSideStyle,
+					{
+						zIndex: '10',
+					},
+				]}
 			/>
 			<MapSide
 				position={position}
 				onFlip={handleFlip}
-				className={clsx(commonSideStyle, '[transform:rotateY(180deg)]')}
+				css={[
+					commonSideStyle,
+					{
+						transform: 'rotateY(180deg)',
+					},
+				]}
 			/>
 		</div>
 	)

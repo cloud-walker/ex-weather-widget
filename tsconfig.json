@@ -6,6 +6,11 @@
 		"module": "ES2022",
 		"moduleResolution": "bundler",
 		"skipLibCheck": true,
-		"target": "ESNext"
-	}
+		"target": "ESNext",
+		"paths": {
+			"#/*": ["./src/*"],
+			"#/panda/*": ["./styled-system/*"]
+		}
+	},
+	"include": ["src", "styled-system"]
 }
