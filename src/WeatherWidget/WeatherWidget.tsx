@@ -46,14 +46,22 @@ export function WeatherWidget() {
 			<WeatherSide
 				position={position}
 				onFlip={handleFlip}
-				className={css(commonSideStyle, {zIndex: '10'})}
+				css={[
+					commonSideStyle,
+					{
+						zIndex: '10',
+					},
+				]}
 			/>
 			<MapSide
 				position={position}
 				onFlip={handleFlip}
-				className={css(commonSideStyle, {
-					transform: 'rotateY(180deg)',
-				})}
+				css={[
+					commonSideStyle,
+					{
+						transform: 'rotateY(180deg)',
+					},
+				]}
 			/>
 		</div>
 	)

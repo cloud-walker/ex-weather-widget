@@ -1,8 +1,7 @@
-import type {HTMLAttributes} from 'react'
 import {MdFlipToFront} from 'react-icons/md'
+import {envVars} from '#/envVars'
 import {css, cx} from '#/panda/css'
-import {styled} from '#/panda/jsx'
-import {envVars} from '../envVars'
+import {type HTMLStyledProps, styled} from '#/panda/jsx'
 import {ButtonFlip} from './ButtonFlip'
 
 /**
@@ -10,10 +9,10 @@ import {ButtonFlip} from './ButtonFlip'
  */
 export function MapSide({
 	position,
-	className,
 	onFlip,
+	css: cssProp,
 	...props
-}: HTMLAttributes<HTMLElement> & {
+}: HTMLStyledProps<'div'> & {
 	position?: GeolocationPosition
 	onFlip?: () => void
 }) {
@@ -21,18 +20,21 @@ export function MapSide({
 
 	return (
 		<div
-			className={cx(
-				className,
-				css({
-					position: 'relative',
-					display: 'flex',
-					alignItems: 'start',
-					justifyContent: 'end',
-					padding: '4',
-					minHeight: '[400px]',
-				}),
-			)}
 			{...props}
+			className={cx(
+				props.className,
+				css(
+					{
+						position: 'relative',
+						display: 'flex',
+						alignItems: 'start',
+						justifyContent: 'end',
+						padding: '4',
+						minHeight: '[400px]',
+					},
+					cssProp,
+				),
+			)}
 		>
 			<styled.iframe
 				key={url}

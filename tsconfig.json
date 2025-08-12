@@ -8,6 +8,7 @@
 		"skipLibCheck": true,
 		"target": "ESNext",
 		"paths": {
+			"#/*": ["./src/*"],
 			"#/panda/*": ["./styled-system/*"]
 		}
 	},

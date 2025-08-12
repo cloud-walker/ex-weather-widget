@@ -2,10 +2,10 @@ import {useQuery} from '@tanstack/react-query'
 import {createElement} from 'react'
 import {MdFlipToBack} from 'react-icons/md'
 import {WiCloudy, WiHumidity, WiWindy} from 'react-icons/wi'
+import {getWeather} from '#/models/weather/weather'
+import {weatherId2Icon} from '#/models/weather/weatherId2Icon'
 import {css, cx} from '#/panda/css'
-import {styled} from '#/panda/jsx'
-import {getWeather} from '../models/weather/weather'
-import {weatherId2Icon} from '../models/weather/weatherId2Icon'
+import {type HTMLStyledProps, styled} from '#/panda/jsx'
 import {ButtonFlip} from './ButtonFlip'
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -19,10 +19,10 @@ const celsiusFormatter = new Intl.NumberFormat('en-GB', {
 
 export function WeatherSide({
 	position,
-	className,
 	onFlip,
+	css: cssProp,
 	...props
-}: React.ComponentPropsWithRef<'div'> & {
+}: HTMLStyledProps<'div'> & {
 	position?: GeolocationPosition
 	onFlip?: () => void
 }) {
@@ -45,16 +45,19 @@ export function WeatherSide({
 
 	return (
 		<div
-			className={cx(
-				className,
-				css({
-					backgroundColor: 'white',
-					display: 'flex',
-					flexDirection: 'column',
-					gap: '4',
-				}),
-			)}
 			{...props}
+			className={cx(
+				props.className,
+				css(
+					{
+						backgroundColor: 'white',
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '4',
+					},
+					cssProp,
+				),
+			)}
 		>
 			<styled.div
 				css={{

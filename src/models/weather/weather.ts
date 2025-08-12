@@ -1,6 +1,6 @@
-import {envVars} from '../../envVars'
+import {envVars} from '#/envVars'
 
-export type ResponseGetWeather = {
+export interface ResponseGetWeather {
 	base: string
 	clouds: {all: number}
 	rain?: Record<string, number>
