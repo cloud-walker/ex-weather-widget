@@ -9,7 +9,7 @@ export default defineConfig({
 	jsxFramework: 'react',
 	jsxStyleProps: 'minimal',
 	shorthands: false,
-	importMap: '#',
+	importMap: '#/panda',
 
 	// Where to look for your css declarations
 	include: ['./src/**/*.{ts,tsx}'],

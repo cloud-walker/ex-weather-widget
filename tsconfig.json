@@ -8,7 +8,7 @@
 		"skipLibCheck": true,
 		"target": "ESNext",
 		"paths": {
-			"#/*": ["./src/*", "./styled-system/*"]
+			"#/panda/*": ["./styled-system/*"]
 		}
 	},
 	"include": ["src", "styled-system"]

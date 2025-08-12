@@ -1,4 +1,4 @@
-import {styled} from '#/jsx'
+import {styled} from '#/panda/jsx'
 
 import {WeatherWidget} from './WeatherWidget/WeatherWidget'
 
@@ -10,6 +10,7 @@ export function App() {
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
+				backgroundColor: 'gray.500',
 			}}
 		>
 			<WeatherWidget />
