@@ -4,16 +4,16 @@ Weather widget exercize
 
 ## Requirements
 
-Have node.js and yarn 1 installed
+Have pnpm 10 installed
 
 ## Install
 
 ```
-yarn // To install dependencies
+pnpm i // To install dependencies
 ```
 
 ## Usage
 
 ```
-yarn dev
+pnpm dev
 ```
